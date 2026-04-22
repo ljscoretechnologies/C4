@@ -1188,5 +1188,43 @@ function initChartsForPanel(id) {
 // Init
 switchRole('admin');
 </script>
+  <input id="email" placeholder="Email">
+<input id="password" type="password" placeholder="Password">
+
+<button onclick="signup(email.value, password.value)">Sign Up</button>
+<button onclick="login(email.value, password.value)">Login</button>
+
+  <script type="module">
+  import { initializeApp } from "https://www.gstatic.com/firebasejs/10.12.2/firebase-app.js";
+  import { getAuth, createUserWithEmailAndPassword, signInWithEmailAndPassword }
+  from "https://www.gstatic.com/firebasejs/10.12.2/firebase-auth.js";
+
+  const firebaseConfig = {
+    apiKey: "AIzaSyBFipu_3gWU9P8yB_I1lmFT58_NKPo8CNg",
+    authDomain: "c4data-40b56.firebaseapp.com",
+    projectId: "c4data-40b56",
+    storageBucket: "c4data-40b56.firebasestorage.app",
+    messagingSenderId: "89865774984",
+    appId: "1:89865774984:web:9c11708b4a834fffd37c3d"
+  };
+
+  const app = initializeApp(firebaseConfig);
+  const auth = getAuth(app);
+
+  // CREATE ACCOUNT
+  window.signup = (email, password) => {
+    createUserWithEmailAndPassword(auth, email, password)
+      .then(() => alert("Account created"))
+      .catch(err => alert(err.message));
+  };
+
+  // LOGIN
+  window.login = (email, password) => {
+    signInWithEmailAndPassword(auth, email, password)
+      .then(() => alert("Logged in"))
+      .catch(err => alert(err.message));
+  };
+</script>
+
 </body>
 </html>
